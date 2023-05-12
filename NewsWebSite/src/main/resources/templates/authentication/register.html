@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <form method="POST" th:object="${userRegister}">
+        <form method="POST" th:object="${userRegisterResponse}">
             <div class="row justify-content-md-center">
                 <div class="col-3">
                     <label for="name" class="form-label auth-form-label reg-form-label">Enter name</label>
@@ -29,7 +29,7 @@
                     <label for="username" class="form-label auth-form-label reg-form-label">Enter username</label>
                     <div class="validation-error-wrap">
                         <span class="validation-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-                        <span class="validation-error" th:text="${usernameIsTaken}"></span>
+                        <span class="validation-error" th:if="${usernameIsTaken != null}" th:text="${usernameIsTaken}"></span>
                     </div>
                     <input id="username" class="form-control" placeholder="Username" th:field="*{username}"><br/>
                 </div>
@@ -39,7 +39,7 @@
                     <label for="password" class="form-label auth-form-label reg-form-label">Enter password</label>
                     <div class="validation-error-wrap">
                         <span class="validation-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                        <span class="validation-error" th:text="${passwordsNotEqual}"></span>
+                        <span class="validation-error" th:if="${usernameIsTaken != null}" th:text="${passwordsNotEqual}"></span>
                     </div>
                     <input type="password" id="password" placeholder="Password" class="form-control" th:field="*{password}"><br/>
                 </div>
@@ -47,7 +47,7 @@
                     <label for="passwordConfirmation" class="form-label auth-form-label reg-form-label">Confirm password</label>
                     <div class="validation-error-wrap">
                         <span class="validation-error" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></span>
-                        <span class="validation-error" th:text="${passwordsNotEqual}"></span>
+                        <span class="validation-error" th:if="${usernameIsTaken != null}" th:text="${passwordsNotEqual}"></span>
                     </div>
                     <input type="password" id="passwordConfirmation" placeholder="Confirm password" class="form-control" th:field="*{passwordConfirmation}"><br/>
                 </div>

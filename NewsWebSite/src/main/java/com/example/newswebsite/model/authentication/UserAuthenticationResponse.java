@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class UserAuthentication {
+public class UserAuthenticationResponse {
     private String username;
     private String password;
 }

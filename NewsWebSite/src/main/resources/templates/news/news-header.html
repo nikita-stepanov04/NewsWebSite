@@ -1,0 +1,32 @@
+<div th:fragment="content">
+    <div class="container">
+        <div class="news-header">
+            <div class="row justify-content-md-center news-main-header">
+                <div class="col-4">
+                    <h2><a class="news-header-link" th:href="@{/myAccount}">My account</a></h2>
+                </div>
+
+                <div class="col-4">
+                  <h1 class="news-header-title">News</h1>
+                </div>
+
+                <div class="col-4 search-for-news-form">
+                  <form th:method="POST" class="">
+                    <input type="text" class="form-control news-header-input" name="newsSearchResponse" placeholder="Search for news">
+                    <button class="btn btn-info grey-button news-header-button" type="submit">Search</button>
+                  </form>
+                </div>
+                <hr class="grey-underline"/>
+            </div>
+
+            <div class="row">
+                <div class="col-2 news-type-wrap" th:each="type: ${newsTypes}">
+                    <a class="news-type" th:text="${type}" th:href="@{'/' + ${type}}"></a>
+                   <div th:if="${currantNewsType == type}">
+                       <hr class="orange-underline news-header-underline"/>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

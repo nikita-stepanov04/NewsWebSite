@@ -28,16 +28,16 @@
 }
 
 .grey-button {
-    border-color: #434343;
+    border-color: #9a9a9a;
     color: white;
-    background-color: #434343;
+    background-color: #9a9a9a;
     font-weight: bold;
 }
 
 .grey-button:hover {
     color: white;
-    border-color: #5D5D5D;
-    background-color: #5D5D5D;
+    border-color: #797979;
+    background-color: #797979;
 }
 
 .orange-button {
@@ -78,4 +78,97 @@
     display: block;
     text-align: center;
 }
+
+.news-header {
+    width: 70%;
+    margin: auto;
+    padding-top: 40px;
+    font-family: Verdana;
+    color: #313131;
+}
+
+.news-header-link {
+    font-family: Verdana;
+    font-weight: normal;
+    display: block;
+    height: 45px;
+    text-decoration: none;
+    color: #313131;
+    padding-top: 10px;
+    transition: 0.15s;
+}
+
+.news-header-link:hover {
+    color: #525252;
+    font-size: 2.1rem;
+    transition: 0.15s;
+}
+
+.news-header-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.news-header-title:hover {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2.8rem;
+    transition: 0.15s;
+}
+
+.news-header-input {
+    height: 45px;
+    width: 65%;
+    display: inline;
+    transition: 0.15s;
+}
+
+.news-header-input:hover {
+    height: 50px;
+    width: 67%;
+    transition: 0.15s;
+}
+
+.news-header-button {
+    height: 45px;
+    width: 27%;
+    display: inline;
+    transition: 0.15s;
+}
+
+.news-header-button:hover {
+    height: 50px;
+    width: 29%;
+    transition: 0.15s;
+}
+
+.search-for-news-form {
+    padding-right: 0;
+}
+
+.news-type-wrap {
+    text-align: center;
+    padding: 0;
+}
+
+.news-type {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #313131;
+    transition: 0.15s;
+}
+
+.news-type:hover {
+    color: #575757;
+    font-size: 1.2rem;
+    transition: 0.15s;
+}
+
+.news-header-underline {
+    margin-top: 5px;
+    width: 100%;
+    display: block;
+}
+
+
 

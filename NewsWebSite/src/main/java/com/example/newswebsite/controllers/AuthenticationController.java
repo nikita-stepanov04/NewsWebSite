@@ -2,8 +2,8 @@ package com.example.newswebsite.controllers;
 
 import com.example.newswebsite.model.Role;
 import com.example.newswebsite.model.User;
-import com.example.newswebsite.model.authentication.UserAuthentication;
-import com.example.newswebsite.model.authentication.UserRegister;
+import com.example.newswebsite.model.authentication.UserAuthenticationResponse;
+import com.example.newswebsite.model.authentication.UserRegisterResponse;
 import com.example.newswebsite.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,61 +18,59 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AuthenticationController {
 
-    private final UserAuthentication userAuthentication;
-    private final UserRegister userRegister;
+    private final UserAuthenticationResponse userAuthenticationResponse;
+    private final UserRegisterResponse userRegisterResponse;
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
 
     @Autowired
-    public AuthenticationController(UserAuthentication userAuthentication,
-                                    UserRegister userRegister,
+    public AuthenticationController(UserAuthenticationResponse userAuthenticationResponse,
+                                    UserRegisterResponse userRegisterResponse,
                                     UserRepository userRepository,
                                     PasswordEncoder encoder) {
-        this.userAuthentication = userAuthentication;
-        this.userRegister = userRegister;
+        this.userAuthenticationResponse = userAuthenticationResponse;
+        this.userRegisterResponse = userRegisterResponse;
         this.userRepository = userRepository;
         this.encoder = encoder;
     }
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("userAuthentication", userAuthentication);
+        model.addAttribute("userAuthentication", userAuthenticationResponse);
         return "authentication/login";
     }
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("userRegister", userRegister);
+        model.addAttribute("userRegisterResponse", userRegisterResponse);
         return "authentication/register";
     }
 
     @PostMapping("/register")
-    public String processRegister(@ModelAttribute @Valid UserRegister userRegister,
+    public String processRegister(@ModelAttribute @Valid UserRegisterResponse userRegisterResponse,
                                   Errors errors, Model model) {
 
-        if (!userRegister.getPassword().equals(userRegister.getPasswordConfirmation())) {
+        if (!userRegisterResponse.getPassword().equals(userRegisterResponse.getPasswordConfirmation())) {
             model.addAttribute("passwordsNotEqual", "Passwords are not equal");
         }
-
-        if (userRepository.findByUsername(userRegister.getUsername()).orElse(null) != null) {
+        if (userRepository.findByUsername(userRegisterResponse.getUsername()).orElse(null) != null) {
             model.addAttribute("usernameIsTaken", "Username is already taken");
         }
-
         if (errors.hasErrors()
                 || model.containsAttribute("passwordsNotEqual")
                 || model.containsAttribute("usernameIsTaken")
         ) {
-            System.out.println(userRegister);
             return "authentication/register";
         }
 
         var user = User.builder()
-                .name(userRegister.getName())
-                .username(userRegister.getUsername())
-                .password(encoder.encode(userRegister.getPassword()))
+                .name(userRegisterResponse.getName())
+                .username(userRegisterResponse.getUsername())
+                .password(encoder.encode(userRegisterResponse.getPassword()))
                 .role(Role.USER)
                 .build();
         userRepository.save(user);
+
         return "redirect:/login";
     }
 }
