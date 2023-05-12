@@ -18,7 +18,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
 
     private String username;
@@ -28,7 +28,13 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // todo Добавить поля в AuthenticationService
+    //statistics
+    @Builder.Default private int politicsNewsViewedCounter = 0;
+    @Builder.Default private int businessNewsViewedCounter = 0;
+    @Builder.Default private int sportsNewsViewedCounter = 0;
+    @Builder.Default private int entertainmentNewsViewedCounter = 0;
+    @Builder.Default private int technologyNewsViewedCounter = 0;
+    @Builder.Default private int healthNewsViewedCounter = 0;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

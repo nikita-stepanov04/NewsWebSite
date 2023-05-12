@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>homepage</title>
+    <link th:href="@{css/style.css}" rel="stylesheet" />
 </head>
 <body>
     <h1>successful log in</h1>
     <form method="POST" th:action="@{/logout}">
         <button type="submit">Log out</button>
     </form>
+    <img th:src="${imagePath}">
 </body>
 </html>

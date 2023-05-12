@@ -8,16 +8,37 @@
 </head>
 <body>
 <div class="container">
-    <div class="container">
-        <form method="POST" th:object="${userAuthentication}">
-            <label for="username">Enter username</label>
-            <input id="username" th:field="*{username}"><br/>
+    <div class="auth-form">
+        <div class="row justify-content-md-center">
+            <div class="col-5 log-in-header">
+                <h1 class="log-in-h1">Log in</h1>
+                <hr class="orange-underline"/>
+            </div>
+        </div>
 
-            <label for="password">Enter password</label>
-            <input id="password" th:field="*{password}"><br/>
+        <div class="row justify-content-md-center">
+            <div class="col-5">
+                <div class="validation-error-wrap" th:if="${param.error}">
+                    <span class="validation-error">Incorrect login or password</span>
+                </div>
 
-            <button type="submit">Submit</button>
-        </form>
+                <form method="POST" th:object="${userAuthentication}">
+                    <label for="username" class="form-label auth-form-label">Enter username</label><br/>
+                    <input id="username" class="form-control" placeholder="Username" th:field="*{username}"><br/>
+
+                    <label for="password" class="form-label auth-form-label">Enter password</label><br/>
+                    <input type="password" id="password" placeholder="Password" class="form-control" th:field="*{password}"><br/>
+
+                    <div class="d-grid gap-2 auth-form-orange-button-wrap">
+                        <a th:href="@{/register}" class="btn btn-primary grey-button" type="button">Create new account</a>
+                    </div>
+
+                    <div class="d-grid gap-2 auth-form-orange-button-wrap">
+                        <button class="btn btn-primary orange-button" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

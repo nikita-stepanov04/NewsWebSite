@@ -2,27 +2,69 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{css/style.css}">
 </head>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="auth-form reg-form">
+        <div class="row justify-content-md-center">
+            <div class="col-5 register-header">
+                <h1 class="log-in-h1">Register</h1>
+                <hr class="orange-underline"/>
+            </div>
+        </div>
+
         <form method="POST" th:object="${userRegister}">
-            <label for="username">Enter username</label>
-            <input id="username" th:field="*{username}"><br/>
+            <div class="row justify-content-md-center">
+                <div class="col-3">
+                    <label for="name" class="form-label auth-form-label reg-form-label">Enter name</label>
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                    </div>
+                    <input id="name" class="form-control" placeholder="Name" th:field="*{name}"><br/>
+                </div>
+                <div class="col-3">
+                    <label for="username" class="form-label auth-form-label reg-form-label">Enter username</label>
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                        <span class="validation-error" th:text="${usernameIsTaken}"></span>
+                    </div>
+                    <input id="username" class="form-control" placeholder="Username" th:field="*{username}"><br/>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-3">
+                    <label for="password" class="form-label auth-form-label reg-form-label">Enter password</label>
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                        <span class="validation-error" th:text="${passwordsNotEqual}"></span>
+                    </div>
+                    <input type="password" id="password" placeholder="Password" class="form-control" th:field="*{password}"><br/>
+                </div>
+                <div class="col-3">
+                    <label for="passwordConfirmation" class="form-label auth-form-label reg-form-label">Confirm password</label>
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></span>
+                        <span class="validation-error" th:text="${passwordsNotEqual}"></span>
+                    </div>
+                    <input type="password" id="passwordConfirmation" placeholder="Confirm password" class="form-control" th:field="*{passwordConfirmation}"><br/>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-6">
+                    <div class="d-grid gap-2 auth-form-orange-button-wrap">
+                        <a th:href="@{/login}" class="btn btn-primary grey-button" type="button">Log in with existing account</a>
+                    </div>
 
-            <label for="name">Enter real name</label>
-            <input id="name" th:field="*{name}"><br/>
-
-            <label for="password">Enter password</label>
-            <input id="password" th:field="*{password}"><br/>
-
-            <label for="confirmPassword">Confirm password</label>
-            <input id="confirmPassword" th:field="*{confirmPassword}"><br/>
-
-            <button type="submit">Submit</button>
+                    <div class="d-grid gap-2 auth-form-orange-button-wrap">
+                        <button class="btn btn-primary orange-button" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
+</div>
 </body>
 </html>
