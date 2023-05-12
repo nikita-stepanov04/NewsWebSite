@@ -1,0 +1,81 @@
+.body {
+    font-family: Verdana;
+}
+
+.orange-underline {
+    border: none;
+    background-color: #ff7f27;
+    color: #ff7f27;
+    height: 4px;
+    opacity: 100;
+    margin: auto;
+    width: 200px;
+}
+
+.log-in-header {
+    margin-top: 180px;
+    margin-bottom: 40px;
+}
+
+.register-header {
+    margin-top: 150px;
+    margin-bottom: 30px;
+}
+
+.log-in-h1 {
+    text-align: center;
+    color: #313131;
+}
+
+.grey-button {
+    border-color: #434343;
+    color: white;
+    background-color: #434343;
+    font-weight: bold;
+}
+
+.grey-button:hover {
+    color: white;
+    border-color: #5D5D5D;
+    background-color: #5D5D5D;
+}
+
+.orange-button {
+    border-color: #ff7f27;
+    color: white;
+    background-color: #ff7f27;
+    font-weight: bold;
+}
+
+.orange-button:hover {
+    color: white;
+    border-color: #CD5E12FF;
+    background-color: #CD5E12FF;
+}
+
+.auth-form-orange-button-wrap {
+    margin-top: 25px;
+}
+
+.validation-error {
+    font-family: Verdana;
+    font-size: 12px;
+    font-weight: bold;
+    color: red;
+}
+
+.validation-error-wrap {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.auth-form-label {
+    font-weight: bold;
+    color: #313131;
+}
+
+.reg-form-label {
+    display: block;
+    text-align: center;
+}
+
