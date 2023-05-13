@@ -2,10 +2,10 @@
     font-family: Verdana;
 }
 
-.orange-underline {
+.coral-underline {
     border: none;
-    background-color: #ff7f27;
-    color: #ff7f27;
+    background-color: #f4656a;
+    color: #f4656a;
     height: 4px;
     opacity: 100;
     margin: auto;
@@ -27,33 +27,33 @@
     color: #313131;
 }
 
-.grey-button {
-    border-color: #9a9a9a;
+.blue-button {
+    border-color: #385c70;
     color: white;
-    background-color: #9a9a9a;
+    background-color: #385c70;
     font-weight: bold;
 }
 
-.grey-button:hover {
+.blue-button:hover {
     color: white;
-    border-color: #797979;
-    background-color: #797979;
+    border-color: #204c67;
+    background-color: #204C67;
 }
 
-.orange-button {
-    border-color: #ff7f27;
+.coral-button {
+    border-color: #f4656a;
     color: white;
-    background-color: #ff7f27;
+    background-color: #f4656a;
     font-weight: bold;
 }
 
-.orange-button:hover {
+.coral-button:hover {
     color: white;
-    border-color: #CD5E12FF;
-    background-color: #CD5E12FF;
+    border-color: #ce595e;
+    background-color: #ce595e;
 }
 
-.auth-form-orange-button-wrap {
+.auth-form-coral-button-wrap {
     margin-top: 25px;
 }
 
@@ -168,6 +168,13 @@
     margin-top: 5px;
     width: 100%;
     display: block;
+}
+
+.news-main-image {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 30px;
+    height: 250px;
 }
 
 

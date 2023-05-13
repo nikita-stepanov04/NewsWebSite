@@ -6,8 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @Entity
 @Data
@@ -39,6 +39,22 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public String getFavouriteNewsType() {
+        Map<String, Integer> newsViewsCounterMap = new HashMap<>();
+        newsViewsCounterMap.put("politics", politicsNewsViewedCounter);
+        newsViewsCounterMap.put("business", businessNewsViewedCounter);
+        newsViewsCounterMap.put("sports", sportsNewsViewedCounter);
+        newsViewsCounterMap.put("entertainment", entertainmentNewsViewedCounter);
+        newsViewsCounterMap.put("technology", technologyNewsViewedCounter);
+        newsViewsCounterMap.put("health", healthNewsViewedCounter);
+
+        Map.Entry<String, Integer> favouriteNewsType = newsViewsCounterMap.entrySet()
+                .stream()
+                .max(Comparator.comparingInt(Map.Entry::getValue))
+                .orElseThrow();
+        return favouriteNewsType.getKey();
     }
 
     @Override
