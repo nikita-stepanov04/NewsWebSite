@@ -1,6 +1,6 @@
 package com.example.newswebsite.repository;
 
-import com.example.newswebsite.model.User;
+import com.example.newswebsite.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

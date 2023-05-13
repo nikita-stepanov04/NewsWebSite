@@ -177,5 +177,33 @@
     height: 250px;
 }
 
+.empty-database-apology {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.news-block {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.news-block-link {
+    text-decoration: none;
+}
+
+.news-block-header {
+    color: #313131;
+    font-size: 1.8rem;
+}
+
+.news-block-preview {
+    color: #313131;
+}
+
+.news-block-first-underline {
+    margin-top: 15px;
+}
 
 

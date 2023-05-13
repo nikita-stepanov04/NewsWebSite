@@ -1,7 +1,10 @@
 package com.example.newswebsite.controllers;
 
-import com.example.newswebsite.model.NewsType;
-import com.example.newswebsite.model.User;
+import com.example.newswebsite.model.news.News;
+import com.example.newswebsite.model.news.NewsPreview;
+import com.example.newswebsite.model.news.NewsType;
+import com.example.newswebsite.model.user.User;
+import com.example.newswebsite.repository.NewsRepository;
 import com.example.newswebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,16 +17,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/news")
 public class NewsController {
 
     private final UserRepository userRepository;
+    private final NewsRepository newsRepository;
 
     @Autowired
-    public NewsController(UserRepository userRepository) {
+    public NewsController(UserRepository userRepository,
+                          NewsRepository newsRepository) {
         this.userRepository = userRepository;
+        this.newsRepository = newsRepository;
     }
 
     @GetMapping
@@ -43,12 +50,17 @@ public class NewsController {
     public String allNewsByType(@PathVariable("newsType") String newsType,
                                 Model model) {
 
+        List<News> newsList = newsRepository.getNewsByNewsType(newsType);
+
+        List<NewsPreview> previewList = newsList.stream()
+                .map(News::toPreview)
+                .toList();
+
         model.addAttribute("currantNewsType", newsType);
         model.addAttribute("newsImagePath", "/img/" + newsType + "_news.png");
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-
-
+        model.addAttribute("newsPreviews", previewList);
 
         return "news/news";
     }

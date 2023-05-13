@@ -15,6 +15,24 @@
         <div class="row news-main-image">
             <img th:src="${newsImagePath}">
         </div>
+
+        <div class="row empty-database-apology" th:if="${newsPreviews.isEmpty()}">
+            <h1>Database is empty :(</h1>
+        </div>
+
+        <div class="row news-block" th:if="${!newsPreviews.isEmpty()}">
+            <hr class="grey-underline news-block-underline news-block-first-underline"/>
+        </div>
+
+        <div th:each="newsPreview: ${newsPreviews}">
+            <div class="row news-block">
+                <a class="news-block-link" th:href="@{'/news/byId/' + ${newsPreview.getId()}}">
+                    <h1 class="news-block-header" th:text="${newsPreview.getTitle()}"></h1>
+                    <p class="news-block-preview" th:text="${newsPreview.getShortBody()}"></p>
+                </a>
+            </div>
+            <hr class="grey-underline news-block news-block-underline"/>
+        </div>
     </div>
 
 

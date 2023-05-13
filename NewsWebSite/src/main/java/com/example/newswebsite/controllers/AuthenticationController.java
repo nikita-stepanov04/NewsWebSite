@@ -1,7 +1,7 @@
 package com.example.newswebsite.controllers;
 
-import com.example.newswebsite.model.Role;
-import com.example.newswebsite.model.User;
+import com.example.newswebsite.model.user.Role;
+import com.example.newswebsite.model.user.User;
 import com.example.newswebsite.model.authentication.UserAuthenticationResponse;
 import com.example.newswebsite.model.authentication.UserRegisterResponse;
 import com.example.newswebsite.repository.UserRepository;

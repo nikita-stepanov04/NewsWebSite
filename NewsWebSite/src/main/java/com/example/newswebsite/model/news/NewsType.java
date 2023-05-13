@@ -1,4 +1,4 @@
-package com.example.newswebsite.model;
+package com.example.newswebsite.model.news;
 
 public enum NewsType {
     POLITICS,
