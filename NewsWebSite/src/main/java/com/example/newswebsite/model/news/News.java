@@ -29,12 +29,15 @@ public class News {
     @Column(length = 3000)
     private String body;
 
+    @Column(length = 500)
+    private String shortBody;
+
     private Date createdAt;
 
-    public NewsPreview toPreview() {
-        String shortBody = Stream.of(body.split(" "))
-                .limit(50)
-                .collect(Collectors.joining(" "));
-        return new NewsPreview(id, title, shortBody + " ...");
-    }
+//    public NewsPreview toPreview() {
+//        String shortBody = Stream.of(body.split(" "))
+//                .limit(50)
+//                .collect(Collectors.joining(" "));
+//        return new NewsPreview(id, title, shortBody + " ...");
+//    }
 }

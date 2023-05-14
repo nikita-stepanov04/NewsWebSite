@@ -1,7 +1,5 @@
 package com.example.newswebsite.controllers;
 
-import com.example.newswebsite.model.news.News;
-import com.example.newswebsite.model.news.NewsPreview;
 import com.example.newswebsite.model.news.NewsType;
 import com.example.newswebsite.model.user.User;
 import com.example.newswebsite.repository.NewsRepository;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/news")
@@ -34,7 +31,7 @@ public class NewsController {
     }
 
     @GetMapping
-    public String news(Model model) {
+    public String news() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -50,17 +47,10 @@ public class NewsController {
     public String allNewsByType(@PathVariable("newsType") String newsType,
                                 Model model) {
 
-        List<News> newsList = newsRepository.getNewsByNewsType(newsType);
-
-        List<NewsPreview> previewList = newsList.stream()
-                .map(News::toPreview)
-                .toList();
-
         model.addAttribute("currantNewsType", newsType);
-        model.addAttribute("newsImagePath", "/img/" + newsType + "_news.png");
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-        model.addAttribute("newsPreviews", previewList);
+        model.addAttribute("newsPreviews", newsRepository.getNewsPreviewsByNewsType(newsType));
 
         return "news/news";
     }

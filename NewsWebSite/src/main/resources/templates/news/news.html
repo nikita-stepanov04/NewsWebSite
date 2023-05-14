@@ -13,7 +13,7 @@
 
     <div class="container">
         <div class="row news-main-image">
-            <img th:src="${newsImagePath}">
+            <img th:src="'/img/' + ${currantNewsType} + '_news.png'">
         </div>
 
         <div class="row empty-database-apology" th:if="${newsPreviews.isEmpty()}">
