@@ -3,6 +3,7 @@ package com.example.newswebsite.repository;
 import com.example.newswebsite.model.news.FullNews;
 import com.example.newswebsite.model.news.News;
 import com.example.newswebsite.model.news.NewsPreview;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

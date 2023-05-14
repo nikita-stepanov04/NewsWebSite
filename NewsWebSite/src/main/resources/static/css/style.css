@@ -53,6 +53,10 @@
     background-color: #ce595e;
 }
 
+.coral-button:active {
+    background-color: #ce595e;
+}
+
 .auth-form-coral-button-wrap {
     margin-top: 25px;
 }
@@ -193,15 +197,16 @@
 }
 
 .news-block-header {
-    color: #313131;
+    color: #204c67;
     font-weight: bold;
     margin-bottom: 15px;
     font-size: 1.8rem;
 }
 
 .news-block-preview {
-    color: #313131;
+    color: #3d3d3d;
     margin-bottom: 10px;
+    text-align: justify;
 }
 
 .news-block-first-underline {
@@ -211,7 +216,7 @@
 .news-posted-at {
     text-align: right;
     margin-bottom: 0;
-    color: #5e5e5e;
+    color: #9d9d9d;
     font-weight: bold;
     font-size: 0.8rem;
 }
@@ -219,6 +224,7 @@
 .news-byId-button {
     width: 90%;
     margin-left: 5%;
+    margin-top: 2rem;
     transition: 0.15s;
 }
 
@@ -232,10 +238,60 @@
     font-size: 2.1rem;
     font-weight: bold;
     text-align: center;
+    color: #204c67;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
 }
 
 .news-byId-body {
     font-size: 1.5rem;
+    text-align: justify;
+    color: #3d3d3d;
+}
+
+.news-byId-container {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3rem;
+}
+
+.signing-footer-wrap {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
+
+.signing-footer-sign {
+    color: #9d9d9d;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.my-account-header-underline {
+    width: 70%;
+    margin-left: 15%;
+}
+
+.my-account-info-form {
+    margin-top: 5rem;
+}
+
+.my-account-info-unit {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.my-account-info-label {
+    font-weight: bold;
+    color: #204C67;
+    text-align: center;
+}
+
+.my-account-info-userdataField {
+    color: #575757;
+    text-align: center;
 }
 
 

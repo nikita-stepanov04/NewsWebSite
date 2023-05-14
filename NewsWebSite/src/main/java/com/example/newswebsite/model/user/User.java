@@ -28,12 +28,12 @@ public class User implements UserDetails {
     private Role role;
 
     //statistics
-    @Builder.Default private int politicsNewsViewedCounter = 0;
-    @Builder.Default private int businessNewsViewedCounter = 0;
-    @Builder.Default private int sportsNewsViewedCounter = 0;
-    @Builder.Default private int entertainmentNewsViewedCounter = 0;
-    @Builder.Default private int technologyNewsViewedCounter = 0;
-    @Builder.Default private int healthNewsViewedCounter = 0;
+    @Builder.Default public int politicsNewsViewedCounter = 0;
+    @Builder.Default public int businessNewsViewedCounter = 0;
+    @Builder.Default public int sportsNewsViewedCounter = 0;
+    @Builder.Default public int entertainmentNewsViewedCounter = 0;
+    @Builder.Default public int technologyNewsViewedCounter = 0;
+    @Builder.Default public int healthNewsViewedCounter = 0;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

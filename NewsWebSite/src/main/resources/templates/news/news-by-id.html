@@ -12,22 +12,23 @@
   <div class="container">
     <div class="news-byId-container">
       <div class="news-byId-title">
-        <h1 class="news-byId-title" th:text="${newsById.getTitle()}"></h1>
+        <h1 class="news-byId-title" id="news-title" th:text="${newsById.getTitle()}"></h1>
       </div>
-
       <div class="news-byId-body">
         <p class="news-byId-body" th:text="${newsById.getFullBody()}"> </p>
       </div>
-
+        <p class="news-posted-at" th:text="${newsById.getCreatedAt()}"></p>
       <div class="row justify-content-md-center news-byId-buttons-block">
           <div class="col-3 news-type-wrap">
-              <a class="btn btn-primary coral-button news-byId-button">Back to news</a>
+              <a th:href="@{'/news/' + ${currantNewsType}}" class="btn btn-primary coral-button news-byId-button">Back to news</a>
           </div>
           <div class="col-3 news-type-wrap">
-              <a class="btn btn-primary blue-button news-byId-button">To title</a>
+              <a href="#news-title" class="btn btn-primary blue-button news-byId-button">To title</a>
           </div>
       </div>
+
     </div>
   </div>
+  <div th:replace="~{footer/signing-footer :: footer}"></div>
 </body>
 </html>

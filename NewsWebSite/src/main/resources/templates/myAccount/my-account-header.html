@@ -1,0 +1,36 @@
+<div th:fragment="header">
+  <div class="container">
+    <div class="news-header">
+      <div class="row justify-content-md-center news-main-header">
+        <div class="col-4">
+          <h1 id="up" class="news-header-title">My account</h1>
+        </div>
+      </div>
+      <div class="row justify-content-md-center news-main-header">
+       <div class="col-9">
+         <hr class="grey-underline"/>
+       </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-3 news-type-wrap">
+          <a class="news-type" th:href="@{/yAccount/info}">Info</a>
+          <div th:if="${currantOption == 'info'}">
+            <hr class="coral-underline news-header-underline my-account-header-underline"/>
+          </div>
+        </div>
+        <div class="col-3 news-type-wrap">
+          <a class="news-type" th:href="@{/myAccount/stats}">Statistics</a>
+          <div th:if="${currantOption == 'stats'}">
+            <hr class="coral-underline news-header-underline"/>
+          </div>
+        </div>
+        <div class="col-3 news-type-wrap">
+          <a class="news-type" th:href="@{/myAccount/history}">History</a>
+          <div th:if="${currantOption == 'history'}">
+            <hr class="coral-underline news-header-underline"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

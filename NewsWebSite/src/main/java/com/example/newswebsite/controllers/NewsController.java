@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 @Controller
@@ -59,6 +60,24 @@ public class NewsController {
     public String newsByID(@PathVariable("newsType") String newsType,
                            @PathVariable("newsId") Long id,
                            Model model) {
+
+        //update viewed news counter for currant news type
+        try {
+            User user = userRepository.findByUsername(SecurityContextHolder
+                            .getContext().getAuthentication().getName())
+                    .orElseThrow(() -> new UsernameNotFoundException("User was not found"));
+            System.out.println(newsType + "NewsViewedCounter");
+            Field counterField = user.getClass().getField(newsType + "NewsViewedCounter");
+            try {
+                int currantValueOfCounterField = counterField.getInt(user);
+                counterField.setInt(user, currantValueOfCounterField + 1);
+                userRepository.save(user);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("newsById", newsRepository.getFullNewsById(id));
         model.addAttribute("currantNewsType", newsType);
