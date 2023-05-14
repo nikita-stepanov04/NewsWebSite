@@ -7,5 +7,5 @@ public interface NewsPreview {
     String getNewsType();
     String getTitle();
     String getShortBody();
-    Date getCreatedAt();
+    String getCreatedAt();
 }

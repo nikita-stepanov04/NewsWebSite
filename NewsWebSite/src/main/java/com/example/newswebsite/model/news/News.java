@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,20 +27,25 @@ public class News {
 
     private String title;
 
-    @Column(length = 500)
-    private String shortBody;
-
     @Column(length = 3000)
     private String fullBody;
 
+    @Column(length = 500)
+    private String shortBody;
 
+    private String createdAt;
 
-    private Date createdAt;
+    public static class NewsBuilder {
+        public News build() {
+            String shortBody = Stream.of(fullBody.split(" "))
+                    .limit(50)
+                    .collect(Collectors.joining(" "));
+            shortBody += " ...";
 
-//    public NewsPreview toPreview() {
-//        String shortBody = Stream.of(body.split(" "))
-//                .limit(50)
-//                .collect(Collectors.joining(" "));
-//        return new NewsPreview(id, title, shortBody + " ...");
-//    }
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+            return new News(id, newsType, title, fullBody, shortBody, now.format(formatter));
+        }
+    }
 }

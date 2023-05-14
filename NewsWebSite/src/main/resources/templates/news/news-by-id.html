@@ -12,15 +12,20 @@
   <div class="container">
     <div class="news-byId-container">
       <div class="news-byId-title">
-        <h1 th:text="${newsById.getTitle()}"></h1>
+        <h1 class="news-byId-title" th:text="${newsById.getTitle()}"></h1>
       </div>
 
       <div class="news-byId-body">
-        <p th:text="${newsById.getFullBody()}"> </p>
+        <p class="news-byId-body" th:text="${newsById.getFullBody()}"> </p>
       </div>
 
       <div class="row justify-content-md-center news-byId-buttons-block">
-
+          <div class="col-3 news-type-wrap">
+              <a class="btn btn-primary coral-button news-byId-button">Back to news</a>
+          </div>
+          <div class="col-3 news-type-wrap">
+              <a class="btn btn-primary blue-button news-byId-button">To title</a>
+          </div>
       </div>
     </div>
   </div>

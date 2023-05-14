@@ -186,7 +186,6 @@
     width: 70%;
     margin-left: 15%;
     margin-top: 1rem;
-    margin-bottom: 1rem;
 }
 
 .news-block-link {
@@ -195,15 +194,48 @@
 
 .news-block-header {
     color: #313131;
+    font-weight: bold;
+    margin-bottom: 15px;
     font-size: 1.8rem;
 }
 
 .news-block-preview {
     color: #313131;
+    margin-bottom: 10px;
 }
 
 .news-block-first-underline {
     margin-top: 15px;
+}
+
+.news-posted-at {
+    text-align: right;
+    margin-bottom: 0;
+    color: #5e5e5e;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.news-byId-button {
+    width: 90%;
+    margin-left: 5%;
+    transition: 0.15s;
+}
+
+.news-byId-button:hover {
+    width: 95%;
+    margin-left: 2.5%;
+    font-size: 1.2rem;
+}
+
+.news-byId-title {
+    font-size: 2.1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.news-byId-body {
+    font-size: 1.5rem;
 }
 
 

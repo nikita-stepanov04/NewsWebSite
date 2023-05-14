@@ -7,5 +7,5 @@ public interface FullNews {
     String getNewsType();
     String getTitle();
     String getFullBody();
-    Date getCreatedAt();
+    String getCreatedAt();
 }
