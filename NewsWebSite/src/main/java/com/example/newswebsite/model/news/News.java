@@ -26,11 +26,13 @@ public class News {
 
     private String title;
 
-    @Column(length = 3000)
-    private String body;
-
     @Column(length = 500)
     private String shortBody;
+
+    @Column(length = 3000)
+    private String fullBody;
+
+
 
     private Date createdAt;
 
