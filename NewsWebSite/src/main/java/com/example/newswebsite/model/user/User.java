@@ -7,6 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Data
@@ -35,12 +37,7 @@ public class User implements UserDetails {
     @Builder.Default public int technologyNewsViewedCounter = 0;
     @Builder.Default public int healthNewsViewedCounter = 0;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    public String getFavouriteNewsType() {
+    public Map<String, Integer> getNewsTypeAndTheirCountersMap() {
         Map<String, Integer> newsViewsCounterMap = new HashMap<>();
         newsViewsCounterMap.put("politics", politicsNewsViewedCounter);
         newsViewsCounterMap.put("business", businessNewsViewedCounter);
@@ -48,12 +45,21 @@ public class User implements UserDetails {
         newsViewsCounterMap.put("entertainment", entertainmentNewsViewedCounter);
         newsViewsCounterMap.put("technology", technologyNewsViewedCounter);
         newsViewsCounterMap.put("health", healthNewsViewedCounter);
+        return newsViewsCounterMap;
+    }
 
+    public String getFavouriteNewsType() {
+        Map<String, Integer> newsViewsCounterMap = getNewsTypeAndTheirCountersMap();
         Map.Entry<String, Integer> favouriteNewsType = newsViewsCounterMap.entrySet()
                 .stream()
                 .max(Comparator.comparingInt(Map.Entry::getValue))
                 .orElseThrow();
         return favouriteNewsType.getKey();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

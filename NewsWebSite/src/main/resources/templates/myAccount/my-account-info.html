@@ -18,7 +18,7 @@
                             <h3 class="my-account-info-label">Username:</h3>
                         </div>
                         <div class="col-6">
-                            <h3 class="my-account-info-userdataField" th:text="${userData.username}"></h3>
+                            <p class="my-account-info-userdataField" th:text="${userData.username}"></p>
                         </div>
                         <hr class="grey-underline">
                     </div>
@@ -27,7 +27,7 @@
                             <h3 class="my-account-info-label">Real name:</h3>
                         </div>
                         <div class="col-6">
-                            <h3 class="my-account-info-userdataField" th:text="${userData.name}"></h3>
+                            <p class="my-account-info-userdataField" th:text="${userData.name}"></p>
                         </div>
                         <hr class="grey-underline">
                     </div>
@@ -36,7 +36,7 @@
                             <h3 class="my-account-info-label">Role:</h3>
                         </div>
                         <div class="col-6">
-                            <h3 class="my-account-info-userdataField" th:text="${userData.role}"></h3>
+                            <p class="my-account-info-userdataField" th:text="${userData.role}"></p>
                         </div>
                         <hr class="grey-underline">
                     </div>
@@ -50,5 +50,6 @@
             </div>
         </div>
     </div>
+<div th:replace="~{footer/signing-footer :: footer}"></div>
 </body>
 </html>

@@ -49,12 +49,8 @@
 
 .coral-button:hover {
     color: white;
-    border-color: #ce595e;
-    background-color: #ce595e;
-}
-
-.coral-button:active {
-    background-color: #ce595e;
+    border-color: #e0464c;
+    background-color: #e0464c;
 }
 
 .auth-form-coral-button-wrap {
@@ -290,8 +286,13 @@
 }
 
 .my-account-info-userdataField {
+    font-size: 1.3rem;
     color: #575757;
     text-align: center;
+}
+
+.stats-container {
+    margin-top: 3rem;
 }
 
 
