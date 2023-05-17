@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface NewsRepository extends CrudRepository<News, Long> {
+public interface NewsRepository extends CrudRepository<News, Long>, NewsByKeywordsRepository {
     List<NewsPreview> getNewsPreviewsByNewsType(String newsType);
 
 }

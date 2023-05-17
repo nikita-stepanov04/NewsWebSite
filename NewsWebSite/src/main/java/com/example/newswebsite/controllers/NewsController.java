@@ -13,13 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 
 import java.util.Arrays;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/news")
@@ -70,6 +69,21 @@ public class NewsController {
         return "news/news";
     }
 
+    @GetMapping("/byKeywords")
+    public String findNewsByKeywords(@RequestParam("keywords") String keywordString,
+                                     Model model) {
+        Set<News> newsSetBySubstring =newsRepository.getNewsBySubstring(keywordString);
+        Set<News> newsSetByKeywords = newsRepository.getNewsByKeywords(keywordString);
+        newsSetBySubstring.addAll(newsSetByKeywords);
+
+        model.addAttribute("currantNewsType", null);
+        model.addAttribute("newsTypes",
+                Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
+        model.addAttribute("newsPreviews", newsSetBySubstring);
+
+        return "news/news";
+    }
+
     @GetMapping("/{newsType}/{newsId}")
     public String newsByID(@PathVariable("newsType") String newsType,
                            @PathVariable("newsId") Long id,
@@ -82,6 +96,7 @@ public class NewsController {
         try {
             News news = newsRepository.findById(id)
                     .orElseThrow(() -> new Exception("News with given id was not found"));
+
             // update viewed news counter for currant news type
             // we can only obtain the string representation of the setter and getter methods
             // for each viewed news counter, so we use Java reflection to access them

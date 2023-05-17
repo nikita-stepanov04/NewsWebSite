@@ -1,7 +1,6 @@
 package com.example.newswebsite.model.user;
 
 import com.example.newswebsite.model.history.History;
-import com.example.newswebsite.model.news.News;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
