@@ -32,6 +32,8 @@
     color: white;
     background-color: #385c70;
     font-weight: bold;
+    --bs-btn-active-bg: #204c67;
+    --bs-btn-active-border-color: #204c67;
 }
 
 .blue-button:hover {
@@ -45,6 +47,8 @@
     color: white;
     background-color: #f4656a;
     font-weight: bold;
+    --bs-btn-active-bg: #e0464c;
+    --bs-btn-active-border-color: #e0464c;
 }
 
 .coral-button:hover {
@@ -57,6 +61,18 @@
     margin-top: 25px;
 }
 
+.auth-form-button {
+    width: 90%;
+    margin-left: 5%;
+    transition: 0.15s;
+}
+
+.auth-form-button:hover {
+    width: 95%;
+    margin-left: 2.5%;
+    font-size: 1.2rem;
+}
+
 .validation-error {
     font-family: Verdana;
     font-size: 12px;
@@ -67,16 +83,31 @@
 .validation-error-wrap {
     margin-top: 20px;
     margin-bottom: 15px;
+    margin-left: 5%;
 }
 
 .auth-form-label {
     font-weight: bold;
+    margin-left: 5%;
     color: #313131;
 }
 
 .reg-form-label {
     display: block;
     text-align: center;
+}
+
+.reg-form-button {
+    width: 95%;
+    margin-left: 2.5%;
+    transition: 0.15s;
+}
+
+.reg-form-button:hover {
+    width: 100%;
+    margin-left: 0;
+    transition: 0.15s;
+    font-size: 1.2rem;
 }
 
 .news-header {
@@ -243,6 +274,10 @@
     margin-top: 4rem;
 }
 
+.news-byId-buttons-block {
+    margin-bottom: 3rem;
+}
+
 .news-byId-body {
     font-size: 1.5rem;
     text-align: justify;
@@ -401,7 +436,3 @@
 .to-news-button:hover {
     padding-top: 0.5rem;
 }
-
-
-
-

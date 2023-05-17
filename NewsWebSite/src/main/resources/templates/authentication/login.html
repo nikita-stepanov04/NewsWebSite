@@ -17,24 +17,24 @@
         </div>
 
         <div class="row justify-content-md-center">
-            <div class="col-5">
+            <div class="col-6">
                 <div class="validation-error-wrap" th:if="${param.error}">
                     <span class="validation-error">Incorrect login or password</span>
                 </div>
 
                 <form method="POST" th:object="${userAuthentication}">
                     <label for="username" class="form-label auth-form-label">Enter username</label><br/>
-                    <input id="username" class="form-control" placeholder="Username" th:field="*{username}"><br/>
+                    <input id="username" class="form-control auth-form-button" placeholder="Username" th:field="*{username}"><br/>
 
                     <label for="password" class="form-label auth-form-label">Enter password</label><br/>
-                    <input type="password" id="password" placeholder="Password" class="form-control" th:field="*{password}"><br/>
+                    <input type="password" id="password" placeholder="Password" class="form-control auth-form-button" th:field="*{password}"><br/>
 
                     <div class="d-grid gap-2 auth-form-coral-button-wrap">
-                        <a th:href="@{/register}" class="btn btn-primary blue-button" type="button">Create new account</a>
+                        <a th:href="@{/register}" class="btn btn-primary blue-button auth-form-button" type="button">Create new account</a>
                     </div>
 
                     <div class="d-grid gap-2 auth-form-coral-button-wrap">
-                        <button class="btn btn-primary coral-button" type="submit">Submit</button>
+                        <button class="btn btn-primary coral-button auth-form-button" type="submit">Submit</button>
                     </div>
                 </form>
             </div>
