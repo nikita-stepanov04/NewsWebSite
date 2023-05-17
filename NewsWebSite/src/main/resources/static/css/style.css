@@ -230,6 +230,10 @@
     font-size: 1.2rem;
 }
 
+.news-byID-button-wrapper {
+    margin-bottom: 4rem;
+}
+
 .news-byId-title {
     font-size: 2.1rem;
     font-weight: bold;
@@ -294,5 +298,110 @@
 .stats-container {
     margin-top: 3rem;
 }
+
+.history-block {
+
+    margin-bottom: 3rem;
+}
+
+.history-title {
+    padding-top: 0.3rem;
+}
+
+.history-date {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #727272;
+    padding-top: 0.6rem;
+    text-align: center;
+}
+
+.history-block-button {
+    width: 90%;
+    margin-left: 5%;
+    transition: 0.15s;
+}
+
+.history-block-button:hover {
+    font-size: 1.1rem;
+    width: 95%;
+    margin-left: 2.5%;
+}
+
+.history-block-toNews-button {
+
+}
+
+.history-block-newsTitle {
+    text-decoration: none;
+    font-family: Verdana;
+    font-size: 1rem;
+    color: #313131;
+}
+
+.history-block-newsTitle:hover {
+    text-decoration: underline;
+    color: #727272;
+}
+
+.history-block {
+    font-family: Verdana;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.history-block-newsForDate {
+    margin-left: 4rem;
+    margin-top: 2rem;
+
+    color: #385c70;
+}
+
+.history-block-item {
+    margin-top: 0;
+}
+
+.my-account-info-button-block {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-weight: bold;
+}
+
+.history-block-clearAll-button {
+    width: 90%;
+    margin-left: 10%;
+    transition: 0.15s;
+    height: 3rem;
+    display: block;
+    font-weight: bold;
+    font-family: Verdana;
+}
+
+.history-block-clearAll-button:hover {
+    width: 100%;
+    margin-left: 0;
+    font-size: 1.2rem;
+}
+
+.history-block-title {
+    margin-left: 1rem;
+    font-weight: bold;
+    color: #313131;
+    font-family: Verdana;
+}
+
+.to-news-button {
+    padding-top: 0.7rem;
+}
+
+.to-news-button:hover {
+    padding-top: 0.5rem;
+}
+
+
 
 

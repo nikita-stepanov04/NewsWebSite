@@ -1,5 +1,7 @@
 package com.example.newswebsite.model.user;
 
+import com.example.newswebsite.model.history.History;
+import com.example.newswebsite.model.news.News;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,8 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Entity
 @Data
@@ -30,12 +30,15 @@ public class User implements UserDetails {
     private Role role;
 
     //statistics
-    @Builder.Default public int politicsNewsViewedCounter = 0;
-    @Builder.Default public int businessNewsViewedCounter = 0;
-    @Builder.Default public int sportsNewsViewedCounter = 0;
-    @Builder.Default public int entertainmentNewsViewedCounter = 0;
-    @Builder.Default public int technologyNewsViewedCounter = 0;
-    @Builder.Default public int healthNewsViewedCounter = 0;
+    @Builder.Default private int politicsNewsViewedCounter = 0;
+    @Builder.Default private int businessNewsViewedCounter = 0;
+    @Builder.Default private int sportsNewsViewedCounter = 0;
+    @Builder.Default private int entertainmentNewsViewedCounter = 0;
+    @Builder.Default private int technologyNewsViewedCounter = 0;
+    @Builder.Default private int healthNewsViewedCounter = 0;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Builder.Default private List<History> histories = new LinkedList<>();
 
     public Map<String, Integer> getNewsTypeAndTheirCountersMap() {
         Map<String, Integer> newsViewsCounterMap = new HashMap<>();

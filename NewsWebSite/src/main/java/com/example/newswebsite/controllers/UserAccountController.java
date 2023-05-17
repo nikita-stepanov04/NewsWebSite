@@ -1,19 +1,21 @@
 package com.example.newswebsite.controllers;
 
+import com.example.newswebsite.model.history.History;
 import com.example.newswebsite.model.news.NewsType;
 import com.example.newswebsite.model.user.User;
+import com.example.newswebsite.repository.HistoryRepository;
 import com.example.newswebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/myAccount")
@@ -21,10 +23,12 @@ public class UserAccountController {
 
     private User userData;
     private final UserRepository userRepository;
+    private final HistoryRepository historyRepository;
 
     @Autowired
-    public UserAccountController(UserRepository userRepository) {
+    public UserAccountController(UserRepository userRepository, HistoryRepository historyRepository) {
         this.userRepository = userRepository;
+        this.historyRepository = historyRepository;
     }
 
     @GetMapping(("/info"))
@@ -60,8 +64,42 @@ public class UserAccountController {
 
         getUserData();
 
+        List<History> history = historyRepository.findHistoriesByUserOrderByViewedAtDesc(userData);
+
+        // grouping the array of histories by viewing days
+        // get set of days
+        Set<String> days = history
+                .stream()
+                // substring is used in order to ignore time
+                .map(h -> h.getViewedAt().substring(0, 10))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        // get map with days as a key and list of news viewed that day as a value
+        Map<String, List<History>> groupedByDayHistory = new LinkedHashMap<>();
+
+        for (String day: days) {
+            groupedByDayHistory.put(day, filterByDay(history, day));
+        }
+
         model.addAttribute("currantOption", "history");
+        model.addAttribute("groupedUserHistory", groupedByDayHistory);
         return "myAccount/my-account-history";
+    }
+
+    @DeleteMapping("/history/delete/{id}")
+    public String processDelete(@PathVariable("id") Long id) {
+
+        historyRepository.deleteById(id);
+        return "redirect:/myAccount/history";
+    }
+
+    @Transactional
+    @DeleteMapping("/history/clearAll")
+    public String processDelete() {
+
+        getUserData();
+        historyRepository.deleteAllByUser(userData);
+        return "redirect:/myAccount/history";
     }
 
     private void getUserData() {
@@ -70,5 +108,13 @@ public class UserAccountController {
 
         userData = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User was not found"));
+    }
+
+    private List<History> filterByDay(List<History> histories, String day) {
+        return histories
+                .stream()
+                // substring is used in order to ignore time
+                .filter(h -> h.getViewedAt().substring(0, 10).equals(day))
+                .toList();
     }
 }
