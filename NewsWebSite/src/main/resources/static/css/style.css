@@ -138,13 +138,13 @@
 .news-header-title {
     font-weight: bold;
     text-align: center;
+    transition: 0.15s;
 }
 
 .news-header-title:hover {
     font-weight: bold;
     text-align: center;
     font-size: 2.8rem;
-    transition: 0.15s;
 }
 
 .news-header-input {
@@ -217,6 +217,7 @@
     width: 70%;
     margin-left: 15%;
     margin-top: 1rem;
+    word-break: break-all;
 }
 
 .news-block-link {
@@ -288,6 +289,7 @@
     width: 70%;
     margin-left: 15%;
     margin-top: 3rem;
+    word-break: break-all;
 }
 
 .signing-footer-wrap {
@@ -335,7 +337,6 @@
 }
 
 .history-block {
-
     margin-bottom: 3rem;
 }
 
@@ -435,4 +436,42 @@
 
 .to-news-button:hover {
     padding-top: 0.5rem;
+}
+
+.news-update-form-dropdown-wrap{
+    width: 95%;
+}
+
+.news-update-form-dropdown {
+    display: inline-block;
+    width: 90%;
+    margin-left: 5%;
+    transition: 0.15s;
+}
+
+.news-update-form-dropdown:hover {
+    width: 95%;
+    font-size: 1.1rem;
+    margin-left: 2.5%;
+}
+
+.update-news-label {
+    width: 95%;
+    margin-left: 2.5%;
+    font-weight: bold;
+    color: #313131;
+}
+
+.news-update-form {
+    width: 97%;
+    margin-left: 1.5%;
+}
+
+.news-update-form-wrap {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+}
+
+.news-body-input {
+    height: 10rem;
 }

@@ -1,0 +1,30 @@
+<div th:fragment="header">
+    <div class="container news-header">
+        <div class="row justify-content-md-center news-main-header">
+            <div class="col-6">
+                <h1 id="up" class="news-header-title">Admin Console</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-2 news-type-wrap">
+                <a class="news-type" th:href="@{/adminConsole/addNews}">Add news</a>
+                <div th:if="${currantOption == 'updateNews'}">
+                    <hr class="coral-underline news-header-underline"/>
+                </div>
+            </div>
+            <div class="col-2 news-type-wrap">
+                <a class="news-type" th:href="@{/adminConsole/editNews}">Edit news</a>
+                <div th:if="${currantOption == 'editNews'}">
+                    <hr class="coral-underline news-header-underline"/>
+                </div>
+            </div>
+            <div class="col-2 news-type-wrap">
+                <a class="news-type" th:href="@{/adminConsole/newsPreview}">News review</a>
+                <div th:if="${currantOption == 'newsPreview'}">
+                    <hr class="coral-underline news-header-underline"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

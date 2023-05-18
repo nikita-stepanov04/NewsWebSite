@@ -24,6 +24,12 @@ public class News {
         String shortBody = Stream.of(fullBody.split(" "))
                 .limit(50)
                 .collect(Collectors.joining(" "));
+
+        // if user enter a text with less than 50 words but more than 500 characters, which is the
+        // limit for the shortBody in the database, get the substring with length 496 to add ' ...' to the end
+        if (shortBody.length() > 500) {
+            shortBody = shortBody.substring(0, 496);
+        }
         shortBody += " ...";
 
         LocalDateTime now = LocalDateTime.now();
@@ -37,6 +43,7 @@ public class News {
     @GeneratedValue
     private Long id;
 
+    @Column(length = 13)
     private String newsType;
 
     private String title;
