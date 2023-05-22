@@ -30,6 +30,11 @@ public class AdminConsoleController {
         this.newsUpdateFormResponse = newsUpdateFormResponse;
     }
 
+    @GetMapping
+    public String adminConsole() {
+        return "redirect:/adminConsole/updateNews";
+    }
+
     @GetMapping("/updateNews")
     public String updateNews(Model model) {
         model.addAttribute("currantOption", "updateNews");

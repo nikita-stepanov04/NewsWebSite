@@ -1,5 +1,6 @@
 package com.example.newswebsite.config;
 
+import com.example.newswebsite.model.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,13 +35,21 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .requestMatchers("/adminConsole/**").hasAuthority(Role.ADMIN.toString())
                         .requestMatchers("/login/**", "/register/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll()
-                        .defaultSuccessUrl("/news")
+                        .successHandler((request, response, authentication) -> {
+                            if (authentication.getAuthorities()
+                                    .contains(new SimpleGrantedAuthority(Role.ADMIN.toString()))) {
+                                response.sendRedirect("/adminConsole");
+                            } else {
+                                response.sendRedirect("/news");
+                            }
+                        })
                 )
                 .logout((logout) -> logout
                         .permitAll()
@@ -48,8 +58,11 @@ public class WebSecurityConfig {
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/login")
+                )
+                .exceptionHandling((exceptionHandling) -> exceptionHandling
+                        .accessDeniedHandler((request, response, accessDeniedException) ->
+                                response.sendRedirect("/error"))
                 );
-
         return http.build();
     }
 

@@ -64,12 +64,18 @@
 .auth-form-button {
     width: 90%;
     margin-left: 5%;
-    transition: 0.15s;
+    transition: 0.2s;
 }
 
+.auth-form-input {
+    width: 90%;
+    margin-left: 5%;
+}
+
+
 .auth-form-button:hover {
-    width: 95%;
-    margin-left: 2.5%;
+    width: 93%;
+    margin-left: 3.5%;
     font-size: 1.2rem;
 }
 
@@ -100,12 +106,12 @@
 .reg-form-button {
     width: 95%;
     margin-left: 2.5%;
-    transition: 0.15s;
+    transition: 0.2s;
 }
 
 .reg-form-button:hover {
-    width: 100%;
-    margin-left: 0;
+    width: 98%;
+    margin-left: 1%;
     transition: 0.15s;
     font-size: 1.2rem;
 }
@@ -449,12 +455,6 @@
     transition: 0.15s;
 }
 
-.news-update-form-dropdown:hover {
-    width: 95%;
-    font-size: 1.1rem;
-    margin-left: 2.5%;
-}
-
 .update-news-label {
     width: 95%;
     margin-left: 2.5%;
@@ -474,4 +474,29 @@
 
 .news-body-input {
     height: 10rem;
+}
+
+.error-image {
+    width: 100%;
+}
+
+.error-status-code {
+    font-size: 8rem;
+    text-align: center;
+    font-family: Verdana;
+    color: #313131;
+    font-weight: bold;
+}
+
+.error-status-code-wrap {
+    margin-left: 2rem;
+    margin-top: 3rem;
+}
+
+.error-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
 }

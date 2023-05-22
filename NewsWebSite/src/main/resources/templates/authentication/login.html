@@ -24,10 +24,10 @@
 
                 <form method="POST" th:object="${userAuthentication}">
                     <label for="username" class="form-label auth-form-label">Enter username</label><br/>
-                    <input id="username" class="form-control auth-form-button" placeholder="Username" th:field="*{username}"><br/>
+                    <input id="username" class="form-control auth-form-input" placeholder="Username" th:field="*{username}"><br/>
 
                     <label for="password" class="form-label auth-form-label">Enter password</label><br/>
-                    <input type="password" id="password" placeholder="Password" class="form-control auth-form-button" th:field="*{password}"><br/>
+                    <input type="password" id="password" placeholder="Password" class="form-control auth-form-input" th:field="*{password}"><br/>
 
                     <div class="d-grid gap-2 auth-form-coral-button-wrap">
                         <a th:href="@{/register}" class="btn btn-primary blue-button auth-form-button" type="button">Create new account</a>

@@ -25,7 +25,7 @@
                         <span class="validation-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                     </div>
                     <label for="title" class="form-label auth-form-label">Enter title</label><br/>
-                    <input id="title" class="form-control auth-form-button" placeholder="Title" th:field="*{title}"><br/>
+                    <input id="title" class="form-control" placeholder="Title" th:field="*{title}"><br/>
                 </div>
                 <div class="col-3">
                     <div class="validation-error-wrap">
@@ -43,7 +43,7 @@
                         <span class="validation-error" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
                     </div>
                     <label for="body" class="form-label update-news-label">Enter body</label><br/>
-                    <textarea id="body" rows="10" class="form-control reg-form-button news-body-input" placeholder="Body" th:field="*{body}"></textarea><br/>
+                    <textarea id="body" rows="10" class="form-control news-body-input" placeholder="Body" th:field="*{body}"></textarea><br/>
                 </div>
             </div>
             <div class="row justify-content-md-center">
