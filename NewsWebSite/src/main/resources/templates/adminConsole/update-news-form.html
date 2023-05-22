@@ -1,0 +1,47 @@
+<div th:fragment="update-news-form">
+    <form th:method="POST" th:object="${newsUpdateFormResponse}">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-6">
+                    <div class="d-grid gap-2 auth-form-coral-button-wrap news-update-form-wrap">
+                        <a th:href="@{#}" class="btn btn-primary blue-button auth-form-button">Autogenerate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center news-update-form">
+                <div class="col-3">
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                    </div>
+                    <label for="title" class="form-label auth-form-label">Enter title</label><br/>
+                    <input id="title" class="form-control auth-form-input" placeholder="Title" th:field="*{title}"><br/>
+                </div>
+                <div class="col-3">
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></span>
+                    </div>
+                    <label for="selectType" class="form-label auth-form-label">Choose type</label><br/>
+                    <select id="selectType" class="form-select news-update-form-dropdown" th:field="*{type}" aria-label="Type">
+                        <option th:each="type: ${newsTypes}" th:value="${type}" th:text="${type}" ></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center news-update-form">
+                <div class="col-6 news-update-form-entity">
+                    <div class="validation-error-wrap">
+                        <span class="validation-error" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
+                    </div>
+                    <label for="body" class="form-label news-body-textarea update-news-label">Enter body</label><br/>
+                    <textarea id="body" rows="10" class="form-control news-body-textarea news-body-input" placeholder="Body" th:field="*{body}"></textarea><br/>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="col-6 news-update-form-entity">
+                    <div class="d-grid gap-2 auth-form-coral-button-wrap">
+                        <button class="btn btn-primary coral-button auth-form-button" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -455,9 +455,13 @@
     transition: 0.15s;
 }
 
-.update-news-label {
+.news-body-textarea {
     width: 95%;
     margin-left: 2.5%;
+}
+
+.update-news-label {
+
     font-weight: bold;
     color: #313131;
 }
@@ -499,4 +503,27 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 10px;
+}
+
+.edit-news-posted-at {
+    margin-right: 2rem;
+}
+
+.edit-news-action-button-block-parent-wrap {
+    position: relative;
+}
+
+.edit-news-action-button-block-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+}
+
+.edit-news-action-button {
+    margin-top: 1rem;
+    width: 90%;
+    margin-left: 10%;
+    display: block;
 }

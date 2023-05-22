@@ -16,4 +16,11 @@ public class NewsUpdateFormResponse {
     @Size(min = 5, message = "Minimal body length is 50 characters")
     @Size(max = 3000, message = "Too long body, max 3000 characters")
     private String body;
+
+    public NewsUpdateFormResponse() {}
+    public NewsUpdateFormResponse(String type, String title, String fullBody) {
+        this.type = type;
+        this.title = title;
+        this.body = fullBody;
+    }
 }
