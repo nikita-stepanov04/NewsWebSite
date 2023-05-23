@@ -41,8 +41,9 @@ public class NewsController {
 
     // if user role is admin this page will be shown after clicking on the News preview in the
     // admin console, we need to render admin console header on the top of the page, so we add
-    // user role to model in order to recognize do we need to render admin console header (if user
-    // is not an admin)
+    // user role to model in order to recognize do we need to render admin console header or not
+    // (if user is not an admin)
+
     @ModelAttribute("role")
     public String addRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -55,6 +56,7 @@ public class NewsController {
 
     // and adminConsoleCurrantOption to underline the currant option in the header
     // if user role is user it would be ignored
+
     @ModelAttribute("adminConsoleCurrantOption")
     public String addAdminConsoleCurrantOption() {
         return "newsPreview";
@@ -95,19 +97,12 @@ public class NewsController {
     @GetMapping("/byKeywords")
     public String findNewsByKeywords(@RequestParam("keywords") String keywordString,
                                      Model model) {
-        Set<News> newsSetBySubstring =newsRepository.getNewsBySubstring(keywordString);
-        Set<News> newsSetByKeywords = newsRepository.getNewsByKeywords(keywordString);
-
-        if (newsSetByKeywords.isEmpty() && newsSetBySubstring.isEmpty()) {
-            return "redirect:/news";
-        }
-
-        newsSetBySubstring.addAll(newsSetByKeywords);
+        Set<News> news = newsRepository.getNewsBySubstringAndThenByKeywords(keywordString);
 
         model.addAttribute("currantNewsType", null);
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-        model.addAttribute("newsPreviews", newsSetBySubstring);
+        model.addAttribute("newsPreviews", news);
 
         return "news/news";
     }

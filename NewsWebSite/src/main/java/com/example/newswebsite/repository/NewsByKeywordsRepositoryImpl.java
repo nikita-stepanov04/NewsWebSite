@@ -14,12 +14,13 @@ import java.util.*;
 
 @RequiredArgsConstructor
 public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
+
     private final EntityManager entityManager;
 
     @Override
-    public Set<News> getNewsByKeywords(String keywordString) {
-
-        String[] keywords = keywordString.split("[^a-zA-Z0-9]+");
+    public Set<News> getNewsBySubstringAndThenByKeywords(String keywordsLine) {
+        String[] keywords = keywordsLine.split("[^a-zA-Z0-9]+");
+        List<String> keywordsList = List.of(keywords);
         Set<String> keywordsSet = new HashSet<>(Arrays.asList(keywords));
 
         if (keywords[0].equals("")) {
@@ -30,61 +31,11 @@ public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
         CriteriaQuery<News> criteriaQuery = criteriaBuilder.createQuery(News.class);
 
         Root<News> root = criteriaQuery.from(News.class);
-        Predicate combinedPredicate = null;
+        Predicate combinedPredicate;
 
-        for (String keyword: keywordsSet) {
+        // make a predicate to find news by substring
 
-            Predicate searchInTitle = criteriaBuilder
-                    .like(criteriaBuilder.lower(root.get("title")),
-                            '%' + keyword.toLowerCase()+ '%');
-
-            Predicate searchInBody = criteriaBuilder
-                    .like(criteriaBuilder.lower(root.get("fullBody")),
-                            '%' + keyword.toLowerCase()+ '%');
-
-            Predicate searchInType = criteriaBuilder
-                    .like(criteriaBuilder.lower(root.get("newsType")),
-                            '%' + keyword.toLowerCase()+ '%');
-
-            if (combinedPredicate != null) {
-                combinedPredicate = criteriaBuilder.or(
-                        combinedPredicate,
-                        searchInTitle,
-                        searchInBody,
-                        searchInType
-                );
-            } else {
-                combinedPredicate = criteriaBuilder.or(
-                        searchInTitle,
-                        searchInBody,
-                        searchInType
-                );
-            }
-        }
-
-        criteriaQuery.where(combinedPredicate);
-        TypedQuery<News> typedQuery = entityManager.createQuery(criteriaQuery);
-        return new LinkedHashSet<>(typedQuery.getResultList());
-    }
-
-
-    @Override
-    public Set<News> getNewsBySubstring(String substring) {
-        String[] keywords = substring.split("[^a-zA-Z0-9]+");
-        List<String> keywordsList = List.of(keywords);
-
-        if (keywords[0].equals("")) {
-            return new HashSet<>();
-        }
-
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<News> criteriaQuery = criteriaBuilder.createQuery(News.class);
-
-        Root<News> root = criteriaQuery.from(News.class);
-
-        substring = '%' + String.join("%", keywordsList).toLowerCase() + '%';
-        System.out.println("\nSUBSTRING IS: \n" + substring);
-
+        String substring = '%' + String.join("%", keywordsList).toLowerCase() + '%';
 
         Predicate searchInTitle = criteriaBuilder
                 .like(criteriaBuilder.lower(root.get("title")), substring);
@@ -95,14 +46,58 @@ public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
         Predicate searchInType = criteriaBuilder
                 .like(criteriaBuilder.lower(root.get("newsType")), substring);
 
-        Predicate combinedPredicate = criteriaBuilder.or(
+        combinedPredicate = criteriaBuilder.or(
                 searchInTitle,
                 searchInBody,
                 searchInType
         );
 
+        // execute query with generated predicate to find by substring
+
         criteriaQuery.where(combinedPredicate);
         TypedQuery<News> typedQuery = entityManager.createQuery(criteriaQuery);
-        return new LinkedHashSet<>(typedQuery.getResultList());
+        Set<News> newsBySubstring = new LinkedHashSet<>(typedQuery.getResultList());
+
+        // make a predicate to find news by keywords
+
+        for (String keyword: keywordsSet) {
+
+            Predicate searchInTitleByKeywords = criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("title")),
+                            '%' + keyword.toLowerCase()+ '%');
+
+            Predicate searchInBodyByKeywords = criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("fullBody")),
+                            '%' + keyword.toLowerCase()+ '%');
+
+            Predicate searchInTypeByKeywords = criteriaBuilder
+                    .like(criteriaBuilder.lower(root.get("newsType")),
+                            '%' + keyword.toLowerCase()+ '%');
+
+            if (combinedPredicate != null) {
+                combinedPredicate = criteriaBuilder.or(
+                        combinedPredicate,
+                        searchInTitleByKeywords,
+                        searchInBodyByKeywords,
+                        searchInTypeByKeywords
+                );
+            } else {
+                combinedPredicate = criteriaBuilder.or(
+                        searchInTitleByKeywords,
+                        searchInBodyByKeywords,
+                        searchInTypeByKeywords
+                );
+            }
+        }
+
+        // execute query with generated predicate to find news by keywords
+
+        criteriaQuery.where(combinedPredicate);
+        typedQuery = entityManager.createQuery(criteriaQuery);
+        Set<News> newsByKeywords = new LinkedHashSet<>(typedQuery.getResultList());
+
+        // merge two sets of news
+        newsBySubstring.addAll(newsByKeywords);
+        return newsBySubstring;
     }
 }
