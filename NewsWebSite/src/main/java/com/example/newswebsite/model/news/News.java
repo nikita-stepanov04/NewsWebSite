@@ -17,11 +17,13 @@ import java.util.stream.Stream;
 @NoArgsConstructor
 public class News {
     public News(String newsType, String title, String fullBody) {
-        this.newsType = newsType;
+        this.newsType = newsType.toLowerCase();
         this.title = title;
         this.fullBody = fullBody;
 
-        String shortBody = Stream.of(fullBody.split(" "))
+        String shortBody = Stream.of(fullBody
+                        .replace("<br><br>", " ")
+                        .split(" "))
                 .limit(50)
                 .collect(Collectors.joining(" "));
 

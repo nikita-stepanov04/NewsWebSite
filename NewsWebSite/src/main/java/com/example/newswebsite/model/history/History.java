@@ -4,7 +4,6 @@ import com.example.newswebsite.model.news.News;
 import com.example.newswebsite.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

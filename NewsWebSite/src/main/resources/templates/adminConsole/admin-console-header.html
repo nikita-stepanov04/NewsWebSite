@@ -1,10 +1,17 @@
 <div th:fragment="header">
     <div class="container news-header">
         <div class="row justify-content-md-center news-main-header">
-            <div class="col-6">
-                <h1 id="up" class="news-header-title">Admin Console</h1>
-                <hr>
+            <div class="col-4">
+                <h2 id="up" class="admin-header-title">Admin Console</h2>
             </div>
+            <div class="col-2">
+                <form th:method="POST" th:action="@{/logout}">
+                    <button type="submit" class="btn btn-primary blue-button admin-header-button">Log out</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col-6"><hr></div>
         </div>
         <div class="row justify-content-md-center">
             <div class="col-2 news-type-wrap">

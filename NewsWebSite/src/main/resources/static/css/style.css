@@ -203,8 +203,8 @@
 }
 
 .news-header-underline {
-    margin-top: 5px;
-    width: 100%;
+    margin-top: 0.7rem;
+    width: 95%;
     display: block;
 }
 
@@ -224,7 +224,7 @@
     width: 70%;
     margin-left: 15%;
     margin-top: 1rem;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .news-block-link {
@@ -527,3 +527,31 @@
     margin-left: 10%;
     display: block;
 }
+
+.admin-header-title {
+    text-align: center;
+    font-family: Verdana;
+    margin-bottom: -0.3rem;
+    font-weight: bold;
+    color: #313131;
+    transition: 0.15s;
+}
+
+.admin-header-title:hover {
+    font-size: 2.2rem;
+}
+
+.admin-header-button {
+    width: 70%;
+    margin-left: 15%;
+    margin-bottom: -0.3rem;
+    transition: 0.15s;
+}
+
+.admin-header-button:hover {
+    width: 80%;
+    margin-left: 10%;
+    font-size: 1.2rem;
+}
+
+
