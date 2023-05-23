@@ -2,11 +2,13 @@ package com.example.newswebsite.controllers;
 
 import com.example.newswebsite.model.history.History;
 import com.example.newswebsite.model.news.NewsType;
+import com.example.newswebsite.model.user.Role;
 import com.example.newswebsite.model.user.User;
 import com.example.newswebsite.repository.HistoryRepository;
 import com.example.newswebsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,27 @@ public class UserAccountController {
     public UserAccountController(UserRepository userRepository, HistoryRepository historyRepository) {
         this.userRepository = userRepository;
         this.historyRepository = historyRepository;
+    }
+
+    // if user role is admin this page will be shown after clicking on the News preview in the
+    // admin console, we need to render admin console header on the top of the page, so we add
+    // user role to model in order to recognize do we need to render admin console header (if user
+    // is not an admin)
+    @ModelAttribute("role")
+    public String addRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities()
+                .contains(new SimpleGrantedAuthority(Role.ADMIN.toString()))) {
+            return Role.ADMIN.toString();
+        }
+        return Role.USER.toString();
+    }
+
+    // and adminConsoleCurrantOption to underline the currant option in the header
+    // if user role is user it would be ignored
+    @ModelAttribute("adminConsoleCurrantOption")
+    public String addAdminConsoleCurrantOption() {
+        return "newsPreview";
     }
 
     @GetMapping(("/info"))

@@ -129,6 +129,7 @@
     font-weight: normal;
     display: block;
     height: 45px;
+    margin-left: 1rem;
     text-decoration: none;
     color: #313131;
     padding-top: 10px;
@@ -295,7 +296,7 @@
     width: 70%;
     margin-left: 15%;
     margin-top: 3rem;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .signing-footer-wrap {
@@ -348,6 +349,8 @@
 
 .history-title {
     padding-top: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .history-date {
@@ -370,15 +373,12 @@
     margin-left: 2.5%;
 }
 
-.history-block-toNews-button {
-
-}
-
 .history-block-newsTitle {
     text-decoration: none;
     font-family: Verdana;
     font-size: 1rem;
     color: #313131;
+    white-space: nowrap;
 }
 
 .history-block-newsTitle:hover {

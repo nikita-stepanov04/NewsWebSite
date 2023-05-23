@@ -1,4 +1,9 @@
 <div th:fragment="header">
+
+  <div th:if="${role == 'ADMIN'}">
+    <div th:replace="~{adminConsole/admin-console-header :: header}"></div>
+  </div>
+
   <div class="container">
     <div class="news-header">
       <div class="row justify-content-md-center news-main-header">

@@ -35,7 +35,7 @@ public class AdminConsoleController {
 
     @GetMapping("/updateNews")
     public String updateNews(Model model) {
-        model.addAttribute("currantOption", "updateNews");
+        model.addAttribute("adminConsoleCurrantOption", "updateNews");
         model.addAttribute("newsUpdateFormResponse", newsUpdateFormResponse);
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
@@ -48,7 +48,7 @@ public class AdminConsoleController {
         if (errors.hasErrors()) {
             model.addAttribute("newsTypes",
                     Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-            model.addAttribute("currantOption", "updateNews");
+            model.addAttribute("adminConsoleCurrantOption", "updateNews");
             return "adminConsole/update-news";
         }
 
@@ -76,7 +76,7 @@ public class AdminConsoleController {
             return "redirect:/adminConsole/editNews";
         }
 
-        model.addAttribute("currantOption", "editNews");
+        model.addAttribute("adminConsoleCurrantOption", "editNews");
         model.addAttribute("currantNewsType", newsType);
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
@@ -97,7 +97,7 @@ public class AdminConsoleController {
         NewsUpdateFormResponse response = new NewsUpdateFormResponse(news.get().getNewsType(),
                 news.get().getTitle(), news.get().getFullBody());
 
-        model.addAttribute("currantOption", "updateNews");
+        model.addAttribute("adminConsoleCurrantOption", "updateNews");
         model.addAttribute("newsUpdateFormResponse", response);
         model.addAttribute("currantNewsType", news.get().getNewsType());
         model.addAttribute("newsTypes",
@@ -113,7 +113,7 @@ public class AdminConsoleController {
         if (errors.hasErrors()) {
             model.addAttribute("newsTypes",
                     Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-            model.addAttribute("currantOption", "updateNews");
+            model.addAttribute("adminConsoleCurrantOption", "updateNews");
             return "adminConsole/edit-news-byId";
         }
 
@@ -136,7 +136,7 @@ public class AdminConsoleController {
 
     @GetMapping("/newsPreview")
     public String newsPreview(Model model) {
-        model.addAttribute("currantOption", "newsPreview");
-        return "adminConsole/update-news";
+        model.addAttribute("adminConsoleCurrantOption", "newsPreview");
+        return "redirect:/news";
     }
 }

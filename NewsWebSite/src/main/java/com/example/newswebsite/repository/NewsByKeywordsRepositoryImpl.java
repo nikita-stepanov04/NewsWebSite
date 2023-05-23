@@ -15,14 +15,15 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
     private final EntityManager entityManager;
+
     @Override
     public Set<News> getNewsByKeywords(String keywordString) {
 
         String[] keywords = keywordString.split("[^a-zA-Z0-9]+");
         Set<String> keywordsSet = new HashSet<>(Arrays.asList(keywords));
 
-        if (keywordsSet.isEmpty()) {
-            return null;
+        if (keywords[0].equals("")) {
+            return new HashSet<>();
         }
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -31,7 +32,7 @@ public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
         Root<News> root = criteriaQuery.from(News.class);
         Predicate combinedPredicate = null;
 
-        for (String keyword: keywords) {
+        for (String keyword: keywordsSet) {
 
             Predicate searchInTitle = criteriaBuilder
                     .like(criteriaBuilder.lower(root.get("title")),
@@ -72,8 +73,8 @@ public class NewsByKeywordsRepositoryImpl implements NewsByKeywordsRepository {
         String[] keywords = substring.split("[^a-zA-Z0-9]+");
         List<String> keywordsList = List.of(keywords);
 
-        if (keywordsList.isEmpty()) {
-            return null;
+        if (keywords[0].equals("")) {
+            return new HashSet<>();
         }
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
