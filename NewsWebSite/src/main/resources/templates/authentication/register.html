@@ -40,7 +40,7 @@
                     <label for="password" class="form-label auth-form-label reg-form-label">Enter password</label>
                     <div class="validation-error-wrap">
                         <span class="validation-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                        <span class="validation-error" th:if="${usernameIsTaken != null}" th:text="${passwordsNotEqual}"></span>
+                        <span class="validation-error" th:if="${passwordsNotEqual != null}" th:text="${passwordsNotEqual}"></span>
                     </div>
                     <input type="password" id="password" placeholder="Password" class="form-control auth-form-input" th:field="*{password}"><br/>
                 </div>
@@ -48,7 +48,7 @@
                     <label for="passwordConfirmation" class="form-label auth-form-label reg-form-label">Confirm password</label>
                     <div class="validation-error-wrap">
                         <span class="validation-error" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></span>
-                        <span class="validation-error" th:if="${usernameIsTaken != null}" th:text="${passwordsNotEqual}"></span>
+                        <span class="validation-error" th:if="${passwordsNotEqual != null}" th:text="${passwordsNotEqual}"></span>
                     </div>
                     <input type="password" id="passwordConfirmation" placeholder="Confirm password" class="form-control auth-form-input" th:field="*{passwordConfirmation}"><br/>
                 </div>

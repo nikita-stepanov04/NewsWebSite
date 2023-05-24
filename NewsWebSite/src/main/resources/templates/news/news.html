@@ -28,7 +28,7 @@
             <div class="row news-block">
                 <a class="news-block-link" th:href="@{'/news/' + ${newsPreview.getNewsType()} + '/' + ${newsPreview.getId()}}">
                     <h1 class="news-block-header" th:utext="${newsPreview.getTitle()}"></h1>
-                    <p class="news-block-preview" th:utext="${newsPreview.getShortBody()}"></p>
+                        <p class="news-block-preview" th:utext="${newsPreview.getShortBody()}"></p>
                     <p class="news-posted-at" th:text="${newsPreview.getCreatedAt()}"></p>
                 </a>
             </div>

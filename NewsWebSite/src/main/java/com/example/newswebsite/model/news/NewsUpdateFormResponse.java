@@ -13,7 +13,7 @@ public class NewsUpdateFormResponse {
     @Size(max = 255, message = "Too long title, max 255 characters")
     private String title;
 
-    @Size(min = 5, message = "Minimal body length is 50 characters")
+    @Size(min = 50, message = "Minimal body length is 50 characters")
     @Size(max = 3000, message = "Too long body, max 3000 characters")
     private String body;
 
