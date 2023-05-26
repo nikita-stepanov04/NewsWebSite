@@ -1,6 +1,7 @@
 package com.example.newswebsite.controllers;
 
 import com.example.newswebsite.model.news.News;
+import com.example.newswebsite.model.news.NewsPreview;
 import com.example.newswebsite.model.news.NewsType;
 import com.example.newswebsite.model.news.NewsUpdateFormResponse;
 import com.example.newswebsite.repository.NewsRepository;
@@ -12,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 
 @Controller
@@ -80,7 +82,12 @@ public class AdminConsoleController {
         model.addAttribute("currantNewsType", newsType);
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-        model.addAttribute("newsPreviews", newsRepository.getNewsPreviewsByNewsType(newsType));
+        model.addAttribute("newsPreviews",
+                newsRepository.getNewsPreviewsByNewsType(newsType)
+                        .stream()
+                        .sorted(Comparator.comparing(NewsPreview::getCreatedAt).reversed())
+                        .toList()
+        );
 
         return "adminConsole/edit-news";
     }

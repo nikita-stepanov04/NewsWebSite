@@ -30,7 +30,6 @@ public class User implements UserDetails {
 
     //statistics
     @Builder.Default private int politicsNewsViewedCounter = 0;
-    @Builder.Default private int businessNewsViewedCounter = 0;
     @Builder.Default private int sportsNewsViewedCounter = 0;
     @Builder.Default private int entertainmentNewsViewedCounter = 0;
     @Builder.Default private int technologyNewsViewedCounter = 0;
@@ -42,7 +41,6 @@ public class User implements UserDetails {
     public Map<String, Integer> getNewsTypeAndTheirCountersMap() {
         Map<String, Integer> newsViewsCounterMap = new HashMap<>();
         newsViewsCounterMap.put("politics", politicsNewsViewedCounter);
-        newsViewsCounterMap.put("business", businessNewsViewedCounter);
         newsViewsCounterMap.put("sports", sportsNewsViewedCounter);
         newsViewsCounterMap.put("entertainment", entertainmentNewsViewedCounter);
         newsViewsCounterMap.put("technology", technologyNewsViewedCounter);

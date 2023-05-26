@@ -13,7 +13,7 @@
 
     <div class="container">
         <div class="news-header">
-            <div class="row">
+            <div class="row justify-content-md-center">
                 <hr>
                 <div class="col-2 news-type-wrap" th:each="type: ${newsTypes}">
                     <a class="news-type" th:text="${type}" th:href="@{'/adminConsole/editNews/' + ${type}}"></a>

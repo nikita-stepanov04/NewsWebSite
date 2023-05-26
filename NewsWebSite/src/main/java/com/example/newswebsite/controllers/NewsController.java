@@ -2,6 +2,7 @@ package com.example.newswebsite.controllers;
 
 import com.example.newswebsite.model.history.History;
 import com.example.newswebsite.model.news.News;
+import com.example.newswebsite.model.news.NewsPreview;
 import com.example.newswebsite.model.news.NewsType;
 import com.example.newswebsite.model.user.Role;
 import com.example.newswebsite.model.user.User;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Method;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Set;
 
 @Controller
@@ -78,18 +80,33 @@ public class NewsController {
     @GetMapping("/{newsType}")
     public String allNewsByType(@PathVariable("newsType") String newsType,
                                 Model model) {
+        if (newsType.equals("allNews")) {
+            model.addAttribute("currantNewsType", "allNews");
+            model.addAttribute("newsPreviews",
+                    newsRepository.getAllPreviews()
+                            .stream()
+                            .sorted(Comparator.comparing(NewsPreview::getCreatedAt).reversed())
+                            .toList()
+            );
+        } else {
+            try {
+                NewsType.valueOf(newsType.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+                return "redirect:/news";
+            }
 
-        try {
-            NewsType.valueOf(newsType.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return "redirect:/news";
+            model.addAttribute("currantNewsType", newsType);
+            model.addAttribute("newsPreviews",
+                    newsRepository.getNewsPreviewsByNewsType(newsType)
+                            .stream()
+                            .sorted(Comparator.comparing(NewsPreview::getCreatedAt).reversed())
+                            .toList()
+            );
         }
 
-        model.addAttribute("currantNewsType", newsType);
         model.addAttribute("newsTypes",
                 Arrays.stream(NewsType.values()).map(type -> type.toString().toLowerCase()));
-        model.addAttribute("newsPreviews", newsRepository.getNewsPreviewsByNewsType(newsType));
 
         return "news/news";
     }
@@ -121,7 +138,7 @@ public class NewsController {
                     .orElseThrow(() -> new Exception("News with given id was not found"));
 
             // update viewed news counter for currant news type
-            // we can only obtain the string representation of the setter and getter methods
+            // we can only obtain the string representation of the name of setter and getter methods
             // for each viewed news counter, so we use Java reflection to access them
 
             try {
