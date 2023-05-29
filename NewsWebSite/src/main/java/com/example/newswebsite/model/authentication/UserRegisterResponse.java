@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class UserRegisterResponse {
-    @Size(min = 5, message = "Minimal name length is 3 characters")
+    @Size(min = 3, message = "Minimal name length is 3 characters")
     private String name;
 
     @Size(min = 5, message = "Minimal username length is 5 characters")

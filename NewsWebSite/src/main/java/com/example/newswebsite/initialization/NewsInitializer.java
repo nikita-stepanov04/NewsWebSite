@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class NewsInitializer implements CommandLineRunner {
                             item.getNewsType(),
                             item.getTitle(),
                             item.getFullBody())));
+
+            Collections.shuffle(news);
 
             newsRepository.saveAll(news);
         }
